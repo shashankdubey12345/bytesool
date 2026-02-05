@@ -9,20 +9,25 @@
     --primary-color: #2563eb;
     --primary-dark: #1e40af;
     --secondary-color: #10b981;
-    --text-dark: #1f2937;
+    --accent-color: #f97316;
+    --text-dark: #0f172a;
     --text-light: #6b7280;
     --bg-light: #f9fafb;
     --white: #ffffff;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 20px 30px -10px rgba(15, 23, 42, 0.25);
+    --transition: all 0.25s ease;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
-    background-color: var(--white);
+    background: radial-gradient(circle at top left, #e0f2fe 0, transparent 40%),
+                radial-gradient(circle at bottom right, #fce7f3 0, transparent 45%),
+                #f9fafb;
+    min-height: 100vh;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -33,7 +38,8 @@ body {
 
 /* Navigation */
 .navbar {
-    background: var(--white);
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.95);
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -48,9 +54,10 @@ body {
 }
 
 .logo h2 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
 }
 
 .nav-menu {
@@ -68,10 +75,24 @@ body {
     padding: 0.5rem 0;
 }
 
+.nav-menu a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: width 0.25s ease;
+    margin-top: 4px;
+}
+
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
 }
 
 .hamburger {
@@ -90,26 +111,44 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 55%),
+                linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #ec4899 100%);
     color: var(--white);
     padding: 6rem 0;
     text-align: center;
 }
 
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+    top: -200px;
+    right: -150px;
+    filter: blur(2px);
+    opacity: 0.9;
+}
+
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 3.1rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
     opacity: 0.95;
 }
@@ -138,12 +177,13 @@ body {
 }
 
 .btn-primary {
-    background: var(--white);
-    color: var(--primary-color);
+    background: linear-gradient(135deg, #f9fafb, #e5edff);
+    color: var(--primary-dark);
+    box-shadow: var(--shadow);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateX(1px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -154,21 +194,34 @@ body {
 
 .btn-whatsapp:hover {
     background: #20ba5a;
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateX(1px);
     box-shadow: var(--shadow-lg);
 }
 
 /* Services Section */
 .services-section {
     padding: 5rem 0;
-    background: var(--bg-light);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(249, 250, 251, 1));
 }
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 2.4rem;
+    margin-bottom: 3.2rem;
     color: var(--text-dark);
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -14px;
+    width: 72px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 .services-grid {
@@ -178,17 +231,19 @@ body {
 }
 
 .service-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow);
+    border: 1px solid rgba(148, 163, 184, 0.2);
     transition: var(--transition);
     text-align: center;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.01);
     box-shadow: var(--shadow-lg);
+    border-color: rgba(37, 99, 235, 0.4);
 }
 
 .service-icon {
@@ -231,11 +286,12 @@ body {
 }
 
 .service-detail-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
     padding: 2.5rem;
     margin-bottom: 2rem;
     box-shadow: var(--shadow);
+    border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .service-detail-header {
@@ -320,14 +376,14 @@ body {
 .feature-item {
     text-align: center;
     padding: 2rem;
-    background: var(--bg-light);
+    background: rgba(249, 250, 251, 0.9);
     border-radius: 12px;
     transition: var(--transition);
 }
 
 .feature-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
 
 .feature-icon {
@@ -347,7 +403,8 @@ body {
 
 /* Contact Page */
 .contact-section {
-    padding: 4rem 0;
+    padding: 4rem 0 5rem;
+    background: radial-gradient(circle at top right, rgba(217, 249, 157, 0.35), transparent 55%);
 }
 
 .contact-wrapper {
@@ -386,9 +443,11 @@ body {
 }
 
 .contact-form-wrapper {
-    background: var(--bg-light);
+    background: rgba(249, 250, 251, 0.95);
     padding: 2.5rem;
     border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(148, 163, 184, 0.25);
 }
 
 .contact-form-wrapper h2 {

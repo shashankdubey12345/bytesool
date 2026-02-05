@@ -28,75 +28,6 @@ if (hamburger && navMenu) {
     });
 }
 
-// Contact Form Handling
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value
-        };
-
-        // Validate form
-        if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.message) {
-            showFormMessage('Please fill in all required fields.', 'error');
-            return;
-        }
-
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            showFormMessage('Please enter a valid email address.', 'error');
-            return;
-        }
-
-        // Simulate form submission (replace with actual backend integration)
-        showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
-        
-        // Optionally, you can send the data to a backend API here
-        // Example:
-        // fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(formData)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
-        //     contactForm.reset();
-        // })
-        // .catch(error => {
-        //     showFormMessage('Something went wrong. Please try again later.', 'error');
-        // });
-
-        // Reset form after successful submission
-        setTimeout(() => {
-            contactForm.reset();
-            formMessage.classList.remove('success');
-            formMessage.style.display = 'none';
-        }, 5000);
-    });
-}
-
-function showFormMessage(message, type) {
-    if (formMessage) {
-        formMessage.textContent = message;
-        formMessage.className = `form-message ${type}`;
-        formMessage.style.display = 'block';
-        
-        // Scroll to message
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-}
-
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -126,7 +57,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe service cards and other elements
+// Observe service cards and other elements, and handle contact form messages
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.service-card, .service-detail-card, .feature-item');
     animatedElements.forEach(el => {
@@ -135,4 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    // Show success/error message after contact form submission (handled by contact.php)
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('success') === '1') {
+            formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+            formMessage.className = 'form-message success';
+            formMessage.style.display = 'block';
+        } else if (params.get('error') === '1') {
+            formMessage.textContent = 'Something went wrong. Please try again later.';
+            formMessage.className = 'form-message error';
+            formMessage.style.display = 'block';
+        }
+    }
 });
