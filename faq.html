@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bytesool | FAQ</title>
+
+<!-- Connect SAME CSS file used in your site -->
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* FAQ Page Extra Styling (matching home page light theme) */
+
+.faq-section{
+    padding:80px 10%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(249, 250, 251, 1));
+    color: #0f172a;
+    min-height:100vh;
+}
+
+.faq-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.faq-title h1{
+    font-size:38px;
+    letter-spacing:1px;
+    color: #0f172a;
+}
+
+.faq-container{
+    max-width:900px;
+    margin:auto;
+}
+
+.faq-item{
+    background: rgba(255, 255, 255, 0.9);
+    border-radius:10px;
+    margin-bottom:15px;
+    overflow:hidden;
+    border:1px solid rgba(148, 163, 184, 0.2);
+    transition:0.3s;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+}
+
+.faq-item:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.25);
+}
+
+.faq-question{
+    padding:18px 22px;
+    cursor:pointer;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color: #0f172a;
+}
+
+.faq-question:hover{
+    background: rgba(249, 250, 251, 0.9);
+}
+
+.faq-answer{
+    padding:0 22px;
+    max-height:0;
+    overflow:hidden;
+    transition:0.4s ease;
+    color: #6b7280;
+}
+
+.faq-item.active .faq-answer{
+    padding:15px 22px 22px;
+    max-height:200px;
+}
+
+.plus{
+    font-size:20px;
+    color: #2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <h2>Bytesool</h2>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== FAQ SECTION ===== -->
+<section class="faq-section">
+
+<div class="faq-title">
+<h1>FAQ (FREQUENTLY ASKED QUESTIONS)</h1>
+</div>
+
+<div class="faq-container">
+
+<div class="faq-item">
+<div class="faq-question">
+Q1. What services does Bytesool provide?
+<span class="plus">+</span>
+</div>
+<div class="faq-answer">
+Bytesool provides website development, mobile app development, digital marketing, branding & graphic design, and IT consulting services.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+Q2. Do you offer customized solutions?
+<span class="plus">+</span>
+</div>
+<div class="faq-answer">
+Yes, all our solutions are customized according to your business requirements.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+Q3. How long does a website project take?
+<span class="plus">+</span>
+</div>
+<div class="faq-answer">
+Depending on complexity, a website usually takes 7–21 days.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+Q4. Do you provide support after project delivery?
+<span class="plus">+</span>
+</div>
+<div class="faq-answer">
+Yes, we provide post-delivery support and maintenance services.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+Q5. Can you help with SEO and online marketing?
+<span class="plus">+</span>
+</div>
+<div class="faq-answer">
+Yes, we offer complete digital marketing and SEO services.
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ===== JS FOR ACCORDION EFFECT ===== -->
+<script>
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+    item.querySelector(".faq-question").addEventListener("click", () => {
+        item.classList.toggle("active");
+    });
+});
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Bytesool</h3>
+                <p>Providing project-based IT & digital solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📧 info@bytesool.com</p>
+                <p>📱 +91-6307583062</p>
+            </div>
+        </div>
+        <div class="footer-cta">
+            <a href="https://wa.me/916307583062" class="btn btn-whatsapp" target="_blank">
+                <span>💬</span> Talk to Our Team on WhatsApp
+            </a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Bytesool. All Rights Reserved.</p>
+            <p>Smart IT & Digital Solutions Company</p>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
